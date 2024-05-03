@@ -1,20 +1,23 @@
 <?php
 
 require_once __DIR__ . '/helpers/functions.php';
-
 require_once __DIR__ . '/helpers/DB.php';
+require_once __DIR__ . '/Models/Course.php';
+require_once __DIR__ . '/Models/Department.php';
 
 
+try {
+  $mysqli = DB::connect();
+} catch (Exception $error) {
+  dd($error->getMessage());
+}
 
-$mysqli = DB::connect();
 
-$sql = "SELECT * FROM `courses`";
-$result = $mysqli->query($sql);
+$result = Department::all($mysqli);
 
-dd($mysqli, $result);
+//dd($mysqli, $result);
 
 DB::disconnect($mysqli);
-
 
 ?>
 
